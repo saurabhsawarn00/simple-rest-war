@@ -1,0 +1,38 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('git') {
+             steps {
+    script {
+        try {
+            git url: 'https://github.com/saurabhsawarn00/simple-rest-war.git', branch: 'main'
+            echo '✅ Repository cloned successfully!'
+            } 
+        catch (Exception e) 
+        {
+            echo "❌ Git clone failed: ${e.getMessage()}"
+            error('Stopping pipeline due to Git failure')
+        }
+    }
+}
+        }
+        stage('build') {
+            steps {
+                bat 'mvn clean package'
+            }            
+            
+            }
+        }
+    }
+
+
+script {
+        try {
+            git url: 'https://github.com/saurabhsawarn00/simple-rest-war.git', branch: 'main'
+            echo 'Repository cloned successfully!'
+        } catch (Exception e) {
+            echo "Git clone failed: ${e.getMessage()}"
+            error('Stopping pipeline due to Git failure')
+        }
+    }
