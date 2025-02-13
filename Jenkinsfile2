@@ -27,12 +27,3 @@ pipeline {
     }
 
 
-script {
-        try {
-            git url: 'https://github.com/saurabhsawarn00/simple-rest-war.git', branch: 'main'
-            echo 'Repository cloned successfully!'
-        } catch (Exception e) {
-            echo "Git clone failed: ${e.getMessage()}"
-            error('Stopping pipeline due to Git failure')
-        }
-    }
